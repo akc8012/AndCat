@@ -72,11 +72,14 @@ public class CatController : MonoBehaviour
 
 	public void SetInfluence(Vector3 influence)
 	{
+		GetComponent<AudioSource>().Play();
 		externInfluence = influence;
 	}
 
 	public IEnumerator SetInfluenceOverT(AnimationCurve curve, Vector3 direction, float speed)
 	{
+		GetComponent<AudioSource>().Play();
+
 		for (float t = 0; t < 1; t += Time.deltaTime * speed)
 		{
 			externInfluence = direction * curve.Evaluate(t);

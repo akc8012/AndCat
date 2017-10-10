@@ -31,6 +31,8 @@ public class VaseKnockOver : MonoBehaviour
 		rb.AddForce(Vector3.left * knockForce, ForceMode.VelocityChange);
 		gotKnocked = true;
 
+		GetComponent<AudioSource>().Play();
+
 		InfluenceCat();
 	}
 
