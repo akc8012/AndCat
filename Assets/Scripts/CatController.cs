@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using XInputDotNetPure;
 
 public class CatController : MonoBehaviour
 {
@@ -60,6 +61,8 @@ public class CatController : MonoBehaviour
 		float t = dot + Mathf.Clamp((1 - dot), 0, 1);
 		t = Mathf.Abs(t - 1);
 
+		GamePad.SetVibration(PlayerIndex.One, t, t);
+
 		if (dotImage != null)
 		{
 			Color col = Color.Lerp(Color.gray, Color.red, t);
@@ -79,6 +82,7 @@ public class CatController : MonoBehaviour
 	public IEnumerator SetInfluenceOverT(AnimationCurve curve, Vector3 direction, float speed)
 	{
 		GetComponent<AudioSource>().Play();
+		//GamePad.SetVibration(PlayerIndex.One, 0.5f, 0.5f);
 
 		for (float t = 0; t < 1; t += Time.deltaTime * speed)
 		{
@@ -86,6 +90,7 @@ public class CatController : MonoBehaviour
 			yield return null;
 		}
 
+		GamePad.SetVibration(PlayerIndex.One, 0, 0);
 		externInfluence = Vector3.zero;
 	}
 }
