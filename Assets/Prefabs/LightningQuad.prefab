@@ -107,5 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d392451eb89984a40848ad5249b9e05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackWaitTime: 2.15
+  lightningTrigger: {fileID: 0}
+  blackWaitTime: 1.85
   whiteWaitTime: 0.25

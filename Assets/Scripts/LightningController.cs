@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightningController : MonoBehaviour
 {
+	[SerializeField] LightningTrigger lightningTrigger;
+
 	[SerializeField] float blackWaitTime = 1.5f;
 	[SerializeField] float whiteWaitTime = 0.25f;
 
@@ -24,7 +26,10 @@ public class LightningController : MonoBehaviour
 			isWhite = !isWhite;
 
 			if (isWhite)
+			{
 				rend.material.color = Color.white;
+				lightningTrigger.InfluenceCat();
+			}
 			else
 				rend.material.color = Color.black;
 
