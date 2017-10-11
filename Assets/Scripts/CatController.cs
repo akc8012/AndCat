@@ -39,6 +39,9 @@ public class CatController : MonoBehaviour
 		if (externInfluence != Vector3.zero)
 			movement *= influenceIgnoreAmount;
 
+		if (Input.GetKey(KeyCode.LeftShift))
+			movement *= 5;
+
 		Vector3 influence = externInfluence;
 		HandleRunEffects(Vector3.Dot(movement, externInfluence));
 
@@ -62,8 +65,12 @@ public class CatController : MonoBehaviour
 
 	void HandleRunEffects(float dot)
 	{
+		// this is the maximum dot product when influence and movement are opposite. why 16? dunno yet
+		const float MagicNumber = 16;
+
 		float t = dot + Mathf.Clamp((1 - dot), 0, 1);
 		t = Mathf.Abs(t - 1);
+		t /= MagicNumber;
 
 		GamePad.SetVibration(PlayerIndex.One, t, t);
 
