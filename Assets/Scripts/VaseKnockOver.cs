@@ -5,6 +5,8 @@ using UnityEngine;
 public class VaseKnockOver : MonoBehaviour
 {
 	[SerializeField] float knockForce = 1;
+	[SerializeField] float directionAmount = 1;
+	[SerializeField] float influenceSpeed = 1;
 	[SerializeField] AnimationCurve curve;
 
 	Rigidbody rb;
@@ -44,7 +46,7 @@ public class VaseKnockOver : MonoBehaviour
 
 		CatController catController = cat.GetComponent<CatController>();
 
-		catController.StartCoroutine(catController.SetInfluenceOverT(curve, direction * 6, 1.25f));
+		catController.StartCoroutine(catController.SetInfluenceOverT(curve, direction * directionAmount, influenceSpeed));
 	}
 
 	void Reset()

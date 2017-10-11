@@ -449,6 +449,7 @@ MonoBehaviour:
   rotateMesh: {fileID: 4162005699406312}
   text: {fileID: 0}
   dotImage: {fileID: 0}
+  influenceIgnoreAmount: 2.75
 --- !u!136 &136223841476890128
 CapsuleCollider:
   m_ObjectHideFlags: 1

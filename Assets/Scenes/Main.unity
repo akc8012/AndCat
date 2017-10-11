@@ -323,6 +323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockForce: 3
+  directionAmount: 6
+  influenceSpeed: 1.25
   curve:
     serializedVersion: 2
     m_Curve:

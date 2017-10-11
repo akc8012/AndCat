@@ -9,6 +9,7 @@ public class CatController : MonoBehaviour
 	[SerializeField] Transform rotateMesh;
 	[SerializeField] Text text;
 	[SerializeField] Image dotImage;
+	[SerializeField] float influenceIgnoreAmount = 1;
 
 	CharacterController characterController;
 	Transform cam;
@@ -34,6 +35,9 @@ public class CatController : MonoBehaviour
 		//influence *= 3;
 
 		//HandleRunEffects(Vector3.Dot(movement, (influence.normalized * influenceInput.magnitude)));
+
+		if (externInfluence != Vector3.zero)
+			movement *= influenceIgnoreAmount;
 
 		Vector3 influence = externInfluence;
 		HandleRunEffects(Vector3.Dot(movement, externInfluence));
