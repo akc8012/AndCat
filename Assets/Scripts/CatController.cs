@@ -36,14 +36,17 @@ public class CatController : MonoBehaviour
 
 		//HandleRunEffects(Vector3.Dot(movement, (influence.normalized * influenceInput.magnitude)));
 
-		if (externInfluence != Vector3.zero)
+		float normalizedDot = Vector3.Dot(movement.normalized, externInfluence.normalized);
+
+		if (externInfluence != Vector3.zero && normalizedDot < 0)
 			movement *= influenceIgnoreAmount;
 
 		if (Input.GetKey(KeyCode.LeftShift))
 			movement *= 5;
 
 		Vector3 influence = externInfluence;
-		HandleRunEffects(Vector3.Dot(movement, externInfluence));
+		normalizedDot = Vector3.Dot(movement.normalized, externInfluence.normalized);		// do again because change
+		HandleRunEffects(Vector3.Dot(movement, externInfluence), normalizedDot);
 
 		Vector3 avgMovement = ((movement + influence) / 2).normalized; 
 		RotateMesh(avgMovement);
@@ -63,8 +66,11 @@ public class CatController : MonoBehaviour
 			rotateMesh.rotation = Quaternion.LookRotation(targetRotation);
 	}
 
-	void HandleRunEffects(float dot)
+	void HandleRunEffects(float dot, float normalizedDot)
 	{
+		if (normalizedDot > 0)
+			return;
+		
 		// this is the maximum dot product when influence and movement are opposite. why 16? dunno yet
 		const float MagicNumber = 16;
 
