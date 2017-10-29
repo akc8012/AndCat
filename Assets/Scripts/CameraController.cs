@@ -22,6 +22,11 @@ public class CameraController : MonoBehaviour
 		offset = transform.position - follow.position;
 	}
 
+	void OnEnable()
+	{
+		transform.rotation = Quaternion.Euler(26.6f, 0, 0);
+	}
+
 	void LateUpdate()
 	{
 		if (allowCameraMovement)
@@ -41,7 +46,8 @@ public class CameraController : MonoBehaviour
 
 	public void SetState(DirState dirState)
 	{
-		this.dirState = dirState;
+		if (this.enabled)
+			this.dirState = dirState;
 	}
 
 	Vector3 GetCameraTarget()

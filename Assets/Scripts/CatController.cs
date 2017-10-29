@@ -113,12 +113,22 @@ public class CatController : MonoBehaviour
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.name.ToLower().Contains("camerastateswitch"))
+		string nameLower = col.name.ToLower();
+
+		if (nameLower.Contains("camerastateswitch"))
 		{
-			if (col.name.ToLower().Contains("forward"))
+			if (nameLower.Contains("point"))
+			{
+				Camera.main.GetComponent<CameraStateController>().SetPointCam();
+				return;
+			}
+
+			Camera.main.GetComponent<CameraStateController>().SetHallwayCam();
+
+			if (nameLower.Contains("forward"))
 				Camera.main.GetComponent<CameraController>().SetState(CameraController.DirState.Forward);
 
-			if (col.name.ToLower().Contains("left"))
+			if (nameLower.Contains("left"))
 				Camera.main.GetComponent<CameraController>().SetState(CameraController.DirState.Left);
 		}
 	}
