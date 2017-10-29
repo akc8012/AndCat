@@ -45,10 +45,10 @@ public class CatController : MonoBehaviour
 			movement *= 5;
 
 		Vector3 influence = externInfluence;
-		normalizedDot = Vector3.Dot(movement.normalized, externInfluence.normalized);		// do again because change
+		normalizedDot = Vector3.Dot(movement.normalized, externInfluence.normalized);       // do again because change
 		HandleRunEffects(Vector3.Dot(movement, externInfluence), normalizedDot);
 
-		Vector3 avgMovement = ((movement + influence) / 2).normalized; 
+		Vector3 avgMovement = ((movement + influence) / 2).normalized;
 		RotateMesh(avgMovement);
 
 		Debug.DrawRay(transform.position, movement, Color.blue);
@@ -70,7 +70,7 @@ public class CatController : MonoBehaviour
 	{
 		if (normalizedDot > 0)
 			return;
-		
+
 		// this is the maximum dot product when influence and movement are opposite. why 16? dunno yet
 		const float MagicNumber = 16;
 
@@ -109,5 +109,17 @@ public class CatController : MonoBehaviour
 
 		GamePad.SetVibration(PlayerIndex.One, 0, 0);
 		externInfluence = Vector3.zero;
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.name.ToLower().Contains("camerastateswitch"))
+		{
+			if (col.name.ToLower().Contains("forward"))
+				Camera.main.GetComponent<CameraController>().SetState(CameraController.DirState.Forward);
+
+			if (col.name.ToLower().Contains("left"))
+				Camera.main.GetComponent<CameraController>().SetState(CameraController.DirState.Left);
+		}
 	}
 }
